@@ -1,1 +1,0 @@
-# yasin-karagoz.github.io

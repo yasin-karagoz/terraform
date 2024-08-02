@@ -1,0 +1,154 @@
+--  Each Terraform workspace uses its own state file to manage the infrastructure associated with that particular workspace.
+
+-- Terraform Enterprise offers the ability to use Terraform to deploy infrastructure in your local on-premises
+   datacenter as well as a public cloud platform, such as AWS, Azure, or GCP.
+
+-- command to run the update the local name while ensuring Terraform does NOT replace the existing resource
+   terraform state mv aws_s3_bucket.data-bucket aws_s3_bucket.prod-encrypted-data-s3-bucket
+
+-- if you have workspaces as prod,dev, and test; if you want to create new workspace from command line
+   terraform workspace -new stage
+
+-- Here are some examples of invalid variable names:
+   Names that start with a number: 1_invalid_variable_name
+   Names that contain spaces or special characters (other than underscores): invalid variable name
+   Names that contain only numbers: 12345
+   Names that are the same as Terraform reserved words, such as var, module, data, count, etc.
+
+-- By default terraform destroy command will prompt the user for confirmation before proceeding.
+
+-- Terraform uses parallelism, by default terraform apply will provision concurrently 10 resource at the same time.
+   You can adjust the parallelism setting in your Terraform configuration file
+   terraform {
+        parallelism = 20
+   }
+
+-- The terraform state command and its subcommands can be used for various tasks related to the Terraform state.
+   Some of the tasks that can be performed using the terraform state command are:
+
+   Inspecting the Terraform state: The terraform state show subcommand can be used to display the current state
+   of a Terraform configuration. This can be useful for verifying the current state of resources managed by Terraform.
+
+   Updating the Terraform state: The terraform state mv and terraform state rm subcommands can
+   be used to move and remove resources from the Terraform state, respectively.
+
+   Pulling and pushing the Terraform state: The terraform state pull and terraform state push subcommands can be
+   used to retrieve and upload the Terraform state from and to a remote backend, respectively.
+   This is useful when multiple users or systems are working with the same Terraform configuration.
+
+   Importing resources into Terraform: The terraform state import subcommand can be used to
+   import existing resources into the Terraform state. This allows Terraform to manage resources that
+   were created outside of Terraform.
+
+-- Terraform is available for macOS, FreeBSD, OpenBSD, Linux, Solaris, and Windows.
+
+-- By default, terraform init downloads plugins into a subdirectory of
+   the working directory, .terraform/providers so that each working directory is self-contained.
+
+-- The terraform plan -refresh-only command is used to create a plan whose goal is only to
+   update the Terraform state to match any changes made to remote objects outside of Terraform.
+
+-- Single Sign-On requires Terraform Cloud for Business or Terraform Enterprise.
+   It is NOT available in Terraform OSS or Terraform Cloud (free)
+
+   Sentinel is available in Terraform Cloud (Team & Governance), Terraform Enterprise,
+   and Terraform Cloud for Business. It is NOT available in Terraform OSS or Terraform Cloud (free).
+
+   Audit Logging is available in Terraform Cloud (Team & Governance), Terraform Enterprise, and
+   Terraform Cloud for Business. It is NOT available in Terraform OSS or Terraform Cloud (free).
+
+   Public Module Registry is available to users of any version of Terraform.
+
+   Workspaces are a feature of all versions of Terraform, both Terraform OSS/Cloud and all other paid versions.
+
+   https://www.datocms-assets.com/2885/1602500234-terraform-full-feature-pricing-tablev2-1.pdf
+
+-- Requirements that must be met in order to publish a module on the Terraform Public Module Registry
+
+   GitHub. The module must be on GitHub and must be a public repo. This is only a requirement for the public registry.
+   If you're using a private registry, you may ignore this requirement
+
+   Named terraform-<PROVIDER>-<NAME>. Module repositories must use this three-part name format, where <NAME> reflects
+   the type of infrastructure the module manages and <PROVIDER> is the main provider where it creates that infrastructure.
+   The <NAME> segment can contain additional hyphens. Examples: terraform-google-vault or terraform-aws-ec2-instance.
+
+   Repository description. The GitHub repository description is used to populate the short description of the module.
+   This should be a simple one-sentence description of the module.
+
+   Standard module structure. The module must adhere to the standard module structure.
+   This allows the registry to inspect your module and generate documentation,
+   track resource usage, parse submodules and examples, and more.
+
+   x.y.z tags for releases. The registry uses tags to identify module versions.
+   Release tag names must be a semantic version, which can optionally be prefixed with a v.
+   For example, v1.0.4 and 0.9.2. To publish a module initially, at least one release tag must be present.
+   Tags that don't look like version numbers are ignored.
+
+-- Terraform init use cases
+
+   Adding a new provider: If you've added a new provider to your code, you'll need to run terraform init to
+   download the provider's binary and configure it.
+
+   Updating the provider configuration: If you've updated the configuration of an existing provider,
+   you'll need to run terraform init to apply the changes.
+
+   Updating the version of a provider: If you've updated the version of a provider,
+   you'll need to run terraform init to download the updated version of the provider's binary.
+
+   Adding or removing a module: If you've added or removed a module from your code,
+   you'll need to run terraform init to download the required modules and dependencies.
+
+   In short, terraform init is used to initialize a Terraform working directory, and you'll need to rerun it
+   whenever you make changes to your code that affect the providers, modules, or versions you're using.
+
+-- Terraform data blocks
+   In Terraform, data blocks are used to retrieve data from external sources, such as APIs or databases, and make
+   that data available to your Terraform configuration. With data blocks, you can use information from external
+   sources to drive your infrastructure as code, making it more dynamic and flexible.
+
+-- Terraform state rm
+   To destroy all Terraform-managed resources except for a single resource, you can use the terraform state command to
+   remove the state for the resources you want to preserve. This effectively tells Terraform that those
+   resources no longer exist, so it will not attempt to destroy them when you run terraform destroy.
+
+-- Terraform list start with 0 and 1,2,3 ... go on
+   so if terraform is calling list 2, it actually calls list 3.
+
+-- In Terraform you can use a list of strings variable to store multiple string values and reference those values in
+   your terraform configuration
+   * Define the variable= to define a list of strings variable in Terraform, you need to specify the type as list(string)
+   variable "foo_list" {
+        type = list(string)
+   }
+
+   * Assign values to the variable: You can assign values to a list strings variable in your configuration
+   variable "foo_list" {
+    type = list(string)
+    default = ["string1", "string2", "string3"]
+   }
+
+
+-- In a required_version parameter in Terraform, the tilde (~) symbol followed by the
+   greater than symbol (>) specifies a "compatible with" version constraint.
+   For example, if your Terraform configuration specifies required_version = "~> 1.12.0",
+   Terraform will accept any version of Terraform 1.12 that is greater than or equal to version 1.12.0 and less than 1.13.0.
+
+-- terraform validate command
+   checks and reports error within modules, attribute names, and value types to ensure they are valid syntactically and
+   internally consistent.
+
+-- required version parameter in a terraform block is used to specify the minimum version of Terraform that is required
+   that is a required to run the configuration.
+
+-- TF_LOG has detailed logs that can be enabled by setting TF_LOG environment variable to any value.
+
+-- terraform import command
+   The manage the resources created manually you can use import command to import existing infrastructure into Terraform.
+
+-- An alias meta-argument is used when using the same provider with different configurations for different resources.
+
+-- You can use modules from a private registry, like the one provided by Terraform Cloud. Private registry modules
+   have source strings of the form <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>. This is the same format as the public
+   registry, but with an added hostname prefix.
+
+

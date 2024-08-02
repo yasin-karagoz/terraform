@@ -1,0 +1,76 @@
+String is a data type
+concatinating is + sign make it bigger strings
+
+def double_word(word):
+    return word * 2 + str(len(word * 2))
+
+print(double_word("hello")) # Should return hellohello10
+print(double_word("abc"))   # Should return abcabc6
+print(double_word(""))      # Should return 0
+
+def first_and_last(message):
+    if not message or message[0] == message[-1]:
+        return True
+    return False
+
+print(first_and_last("else"))
+print(first_and_last("tree"))
+print(first_and_last(""))
+
+More String Methods
+
+The string method lower will return the string with all characters changed to lowercase. The inverse of this is the upper method,
+which will return the string all in uppercase. Just like with previous methods, we call these on a string using dot notation, like "this is a string".upper(). This would return the string "THIS IS A STRING".
+
+def student_grade(name, grade):
+	return "{name} received {grade}% on the exam".format (name= name , grade=grade)
+
+print(student_grade("Reed", 80))
+print(student_grade("Paige", 92))
+print(student_grade("Jesse", 85))
+
+String Formatting
+You can use the format method on strings to concatenate and format strings in all kinds of powerful ways.
+To do this, create a string containing curly brackets, {}, as a placeholder, to be replaced.
+Then call the format method on the string using .format() and pass variables as parameters.
+
+String Reference Cheat Sheet
+String Reference Cheat Sheet
+In Python, there are a lot of things you can do with strings. In this cheat sheet, you’ll find the most common string operations and string methods.
+
+String operations
+len(string) - Returns the length of the string
+
+for character in string - Iterates over each character in the string
+
+if substring in string - Checks whether the substring is part of the string
+
+string[i] - Accesses the character at index i of the string, starting at zero
+
+string[i:j] - Accesses the substring starting at index i, ending at index j minus 1. If i is omitted, its value defaults to 0. If j is omitted, the value will default to len(string).
+
+String methods
+string.lower() - Returns a copy of the string with all lowercase characters
+
+string.upper() - Returns a copy of the string with all uppercase characters
+
+string.lstrip() - Returns a copy of the string with the left-side whitespace removed
+
+string.rstrip() - Returns a copy of the string with the right-side whitespace removed
+
+string.strip() - Returns a copy of the string with both the left and right-side whitespace removed
+
+string.count(substring) - Returns the number of times substring is present in the string
+
+string.isnumeric() - Returns True if there are only numeric characters in the string. If not, returns False.
+
+string.isalpha() - Returns True if there are only alphabetic characters in the string. If not, returns False.
+
+string.split() - Returns a list of substrings that were separated by whitespace (whitespace can be a space, tab, or new line)
+
+string.split(delimiter) - Returns a list of substrings that were separated by whitespace or a delimiter
+
+string.replace(old, new) - Returns a new string where all occurrences of old have been replaced by new.
+
+delimiter.join(list of strings) - Returns a new string with all the strings joined by the delimiter
+
